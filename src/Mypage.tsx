@@ -1,148 +1,13 @@
-import React from 'react';
+
 import * as styles from './Mypage.css';
-import { Link } from 'react-router-dom';
+import MypageLeftSide from './components/MypageLeftSide';
 import MypageRightSide from './components/MyPageRightSide/MypageRightSide';
 
-interface StudyDeck {
-  name: string;
-  icon: string;
-  newCards: number;
-  reviewCards: number;
-  progress: number;
-}
-
-interface QualificationStatus {
-  name: string;
-  icon: string;
-  value: string;
-  type: 'percentage' | 'date';
-}
-
-const Mypage: React.FC = () => {
-  const studyDecks: StudyDeck[] = [
-    {
-      name: '熊本水検定',
-      icon: '/kumamoto-icon.png',
-      newCards: 27,
-      reviewCards: 38,
-      progress: 40,
-    },
-    {
-      name: '京都検定',
-      icon: '/kyoto-icon.png',
-      newCards: 10,
-      reviewCards: 25,
-      progress: 30,
-    },
-  ];
-
-  const qualifications: QualificationStatus[] = [
-    {
-      name: '熊本水検定',
-      icon: '/kumamoto-icon.png',
-      value: '92%',
-      type: 'percentage',
-    },
-    {
-      name: '熊本水検定',
-      icon: '/kumamoto-icon.png',
-      value: '9/3',
-      type: 'date',
-    },
-    {
-      name: '京都検定',
-      icon: '/kyoto-icon.png',
-      value: '9/19',
-      type: 'date',
-    },
-  ];
-
+export default function Mypage(){
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <main className={styles.mainContent}>
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>学習中</h2>
-              <a href="/decks" className={styles.deckLink}>デッキ一覧 {'>'}</a>
-            </div>
-
-            <div className={styles.decks}>
-              {studyDecks.map((deck, index) => (
-                <Link 
-                  key={index} 
-                  to={`/decks/${deck.name}`} 
-                  className={styles.deckCard}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <div className={styles.deckIconWrapper}>
-                    <img src={deck.icon || "/placeholder.svg"} alt={deck.name} className={styles.deckIcon} />
-                  </div>
-                  <div className={styles.deckInfo}>
-                    <h3 className={styles.deckName}>{deck.name}</h3>
-                    <div className={styles.cardCounts}>
-                      <div className={styles.cardCountItem}>
-                        <span className={styles.cardLabel}>新規</span>
-                        <span className={styles.cardNumber}>{deck.newCards}</span>
-                      </div>
-                      <div className={styles.cardCountItem}>
-                        <span className={styles.cardLabel}>復習</span>
-                        <span className={styles.cardNumber}>{deck.reviewCards}</span>
-                      </div>
-                    </div>
-                    <div className={styles.progressBarWrapper}>
-                      <div className={styles.progressBar}>
-                        <div 
-                          className={styles.progressFill} 
-                          style={{ width: `${deck.progress}%` }} 
-                        />
-                      </div>
-                      <div className={styles.progressDots}>
-                        <span className={styles.dot} />
-                        <span className={styles.dot} />
-                        <span className={styles.dot} />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>定着度が90%以上</h2>
-            <div className={styles.qualifications}>
-              {qualifications.filter(q => q.type === 'percentage').map((qual, index) => (
-                <div key={index} className={styles.qualificationCard}>
-                  <div className={styles.qualIconWrapper}>
-                    <img src={qual.icon || "/placeholder.svg"} alt={qual.name} className={styles.qualIcon} />
-                  </div>
-                  <div className={styles.qualInfo}>
-                    <h3 className={styles.qualName}>{qual.name}</h3>
-                    <span className={styles.percentage}>{qual.value}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>申し込み期限が近い資格</h2>
-            <div className={styles.qualifications}>
-              {qualifications.filter(q => q.type === 'date').map((qual, index) => (
-                <div key={index} className={styles.qualificationCard}>
-                  <div className={styles.qualIconWrapper}>
-                    <img src={qual.icon || "/placeholder.svg"} alt={qual.name} className={styles.qualIcon} />
-                  </div>
-                  <div className={styles.qualInfo}>
-                    <h3 className={styles.qualName}>{qual.name}</h3>
-                    <span className={styles.date}>{qual.value}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </main>
+        <MypageLeftSide />
 
         <MypageRightSide />
 
@@ -151,4 +16,3 @@ const Mypage: React.FC = () => {
   );
 };
 
-export default Mypage;
