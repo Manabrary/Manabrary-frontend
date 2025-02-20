@@ -1,5 +1,7 @@
 import React from 'react';
 import * as styles from './Mypage.css';
+import { Link } from 'react-router-dom';
+
 
 interface StudyDeck {
   name: string;
@@ -64,10 +66,15 @@ const Mypage: React.FC = () => {
               <h2 className={styles.sectionTitle}>学習中</h2>
               <a href="/decks" className={styles.deckLink}>デッキ一覧 {'>'}</a>
             </div>
-            
+
             <div className={styles.decks}>
               {studyDecks.map((deck, index) => (
-                <div key={index} className={styles.deckCard}>
+                <Link 
+                  key={index} 
+                  to={`/decks/${deck.name}`} 
+                  className={styles.deckCard}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
                   <div className={styles.deckIconWrapper}>
                     <img src={deck.icon || "/placeholder.svg"} alt={deck.name} className={styles.deckIcon} />
                   </div>
@@ -97,7 +104,7 @@ const Mypage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </section>

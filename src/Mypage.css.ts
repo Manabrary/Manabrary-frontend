@@ -72,6 +72,13 @@ export const deckCard = style({
   padding: '1rem',
   borderRadius: '0.375rem',
   border: `1px solid ${BORDER_GRAY}`,
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  ':hover': {
+    backgroundColor: '#f8fafc',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+  },
   '@media': {
     'screen and (max-width: 640px)': {
       flexDirection: 'column',
