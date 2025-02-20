@@ -1,3 +1,4 @@
+import * as React from 'react';
 
 import * as styles from './Mypage.css';
 import MypageLeftSide from './components/MypageLeftSide';
