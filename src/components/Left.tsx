@@ -1,8 +1,10 @@
-export default function Left(){
+export default function MainComponents(){
     return(
-        <div>
-            <h1>Left Component</h1>
-        </div>
+        <>
+            <Components1/>
+            <Components2/>
+            <Components3/>
+        </>
     )
     
 }
