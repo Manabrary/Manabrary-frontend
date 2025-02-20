@@ -1,4 +1,5 @@
 import * as styles from './MyPageRightSide.css';
+import { Calendar } from '../ui/calendar';
 
 export default function MypageRightSide(){
     return(
@@ -37,7 +38,7 @@ export default function MypageRightSide(){
 
           <div className={styles.sideSection}>
             <h2 className={styles.sideSectionTitle}>カレンダー</h2>
-            {/* Calendar implementation */}
+            <Calendar />
           </div>
 
           <div className={styles.sideSection}>
