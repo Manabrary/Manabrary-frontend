@@ -332,3 +332,10 @@ export const sideSectionTitle = style({
   fontWeight: '600',
   marginBottom: '1rem',
 });
+
+export const loadingContainer = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '100vh',
+});

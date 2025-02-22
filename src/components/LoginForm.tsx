@@ -1,13 +1,38 @@
-import React from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import * as styles from './login-form.css';
+import React, { useState } from 'react';
+import { Button } from "@/common/ui/button";
+import { Input } from "@/common/ui/input";
+import { Label } from "@/common/ui/label";
+import { Checkbox } from "@/common/ui/checkbox";
+import { Card, CardContent, CardHeader, CardTitle } from "@/common/ui/card";
+import { Separator } from "@/common/ui/separator";
+import * as styles from './LoginForm.css';
+import axios from 'axios';
 
 export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    try {
+      await axios.post('/login', {
+        email,
+        password
+      });
+      window.location.href = '/'; // dashboardから変更
+    } catch (err) {
+      setError('メールアドレスまたはパスワードが正しくありません。');
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header} />
@@ -17,13 +42,18 @@ export default function LoginPage() {
             <CardTitle className={styles.cardTitle}>ログイン</CardTitle>
           </CardHeader>
           <CardContent className={styles.cardContent}>
-            <form>
+            <form onSubmit={handleSubmit}>
+              {error && <div className={styles.error}>{error}</div>}
+              
               <div className={styles.formGroup}>
                 <Label htmlFor="email">メールアドレス</Label>
                 <Input 
                   id="email" 
                   type="email" 
                   className={styles.input}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               
@@ -38,6 +68,9 @@ export default function LoginPage() {
                   id="password" 
                   type="password" 
                   className={styles.input}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
 
@@ -54,8 +87,9 @@ export default function LoginPage() {
               <Button 
                 type="submit" 
                 className={styles.loginButton}
+                disabled={isLoading}
               >
-                ログイン
+                {isLoading ? 'ログイン中...' : 'ログイン'}
               </Button>
 
               <div className={styles.dividerContainer}>
