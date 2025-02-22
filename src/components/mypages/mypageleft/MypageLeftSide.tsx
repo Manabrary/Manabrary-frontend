@@ -1,8 +1,8 @@
 import * as styles from './MypageLeftSide.css';
-import Studying from './Studying';
-import TopRetentionList	 from './TopRetentionList';
-import Deadline	 from './Deadline';
-import Test_Date	 from './TestDate';
+import Studying from '../../Studying';
+import TopRetentionList	 from '../../TopRetentionList';
+import Deadline	 from '../../Deadline';
+import Test_Date	 from '../../TestDate';
 
 interface StudyDeck {
   name: string;

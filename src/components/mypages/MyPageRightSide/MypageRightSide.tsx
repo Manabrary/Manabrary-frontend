@@ -1,5 +1,5 @@
 import * as styles from './MyPageRightSide.css';
-import { Calendar } from '../ui/calendar';
+import { Calendar } from '../../../common/ui/Calendar';
 
 export default function MypageRightSide(){
     return(

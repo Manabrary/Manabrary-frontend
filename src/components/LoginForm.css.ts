@@ -124,3 +124,10 @@ export const signupLink = style({
     textDecoration: 'underline',
   },
 });
+
+export const error = style({
+  color: 'red',
+  marginBottom: '1rem',
+  textAlign: 'center',
+  fontSize: '0.875rem'
+});
