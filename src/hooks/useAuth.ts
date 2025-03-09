@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosInstance from '../lib/axios';
 
 interface UseAuthReturn {
   isAuthenticated: boolean | null;
@@ -13,12 +14,11 @@ export function useAuth(): UseAuthReturn {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
-    
     const checkAuth = async () => {
       try {
+        await axiosInstance.get('/sanctum/csrf-cookie');
         setIsLoading(true);
-        await axios.get('/api/user');
+        await axiosInstance.get('/api/user');
         setIsAuthenticated(true);
       } catch (error) {
         if (axios.isAxiosError(error)) {
