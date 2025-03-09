@@ -6,7 +6,7 @@ import { Checkbox } from "@/common/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/common/ui/card";
 import { Separator } from "@/common/ui/separator";
 import * as styles from './LoginForm.css';
-import axios from 'axios';
+import axiosInstance from '../lib/axios';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -20,11 +20,11 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      await axios.post('/login', {
+      await axiosInstance.post('api/login', {
         email,
         password
       });
-      window.location.href = '/'; // dashboardから変更
+      window.location.href = '/';
     } catch (err) {
       setError('メールアドレスまたはパスワードが正しくありません。');
       console.error(err);
@@ -35,7 +35,6 @@ export default function LoginPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header} />
       <main className={styles.main}>
         <Card className={styles.card}>
           <CardHeader>
@@ -115,7 +114,7 @@ export default function LoginPage() {
               </Button>
 
               <div className={styles.signupContainer}>
-                <a href="#" className={styles.signupLink}>
+                <a href="/signup" className={styles.signupLink}>
                   新規会員登録はこちら
                 </a>
               </div>
