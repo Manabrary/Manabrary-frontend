@@ -1,2 +1,19 @@
-node_modules
-node_modules/.vite
+# 依存関係
+node_modules/
+node_modules/.vite/deps/
+node_modules/esbuild/bin/
+
+# パッケージマネージャーのロックファイル
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# メタデータ
+_metadata.json
+
+# その他の一般的な無視ファイル
+.DS_Store
+*.log
+dist/
+build/
+.env
